@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# PROVIDE: netwatch
+
+. /etc/rc.subr
+
+name="netwatch"
+start_cmd="${name}_start"
+stop_cmd="${name}_stop"
+restart_cmd="${name}_restart"
+status_cmd="${name}_status"
+
+extra_commands="status"
+pidfile="/var/run/netwatch.pid"
+
+netwatch_start() {
+    echo "netwatch starting..."
+    /usr/local/bin/python /root/netwatch.py --daemon
+}
+
+netwatch_stop() {
+    /usr/local/bin/python /root/netwatch.py --stop
+}
+
+netwatch_restart() {
+    netwatch_stop
+    netwatch_start
+}
+
+netwatch_status() {
+    if [ -f $pidfile ]; then
+        echo "PID file $pidfile found. Service running."
+    else
+        echo "PID file not found, is the service running?"
+    fi
+}
+
+load_rc_config $name
+run_rc_command "$1"
+
+# eof
+
