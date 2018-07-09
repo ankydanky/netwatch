@@ -4,6 +4,6 @@
 
 it supports following parameters:
 
--d | --daemon | --start     => start the tool as daemon
--s | --stop                 => stop the tool daemon
--p | --status               => prints out the current PID
+- -d | --daemon | --start     => start the tool as daemon
+- -s | --stop                 => stop the tool daemon
+- -p | --status               => prints out the current PID
